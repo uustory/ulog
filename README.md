@@ -22,9 +22,9 @@ uconsole.py: 一个python写的无比简单的日志接收服务器，用于接�
 没有python的，可以安装下python。安装完成之后，需要安装web.py 这个python库。安装好之后，直接运行：
 
 python uconsole.py 就能启动服务器了，默认监听的端口是8080，如果该端口被占用了，那么可以这样运行，来指定端口：
-
+```
 python uconsole.py 8082 
-
+```
 这样，端口就监听在了8082上了
 
 你可以浏览器中，打开localhost:8082/ 日志将会显示在网页上
@@ -35,14 +35,14 @@ python uconsole.py 8082
 直接将ULog4Android/bin/ulog4android.jar拷贝到Android工程中的libs目录中
 
 在AndroidManifest.xml中的meta-data中，添加部分日志参数：
-
-<meta-data android:name="ulog.enable" android:value="true" />  <!--是否开启日志，关闭之后，不会输出到logcat也不会输出到远程-->
-<meta-data android:name="ulog.level" android:value="DEBUG" />   <!--日志级别(DEBUG|INFO|WARNING|ERROR)-->
-<meta-data android:name="ulog.local" android:value="true" />    <!--是否在logcat中打印-->
-<meta-data android:name="ulog.remote" android:value="true" />   <!--是否远程打印-->
-<meta-data android:name="ulog.remote_interval" android:value="500" />   <!--远程打印时，日志上报间隔，单位毫秒-->
-<meta-data android:name="ulog.remote_url" android:value="http://192.168.18.9:8080/" />  <!--远程日志服务器地址，就是uconsole监听的地址-->
-
+```
+    <meta-data android:name="ulog.enable" android:value="true" />  <!--是否开启日志，关闭之后，不会输出到logcat也不会输出到远程-->
+    <meta-data android:name="ulog.level" android:value="DEBUG" />   <!--日志级别(DEBUG|INFO|WARNING|ERROR)-->
+    <meta-data android:name="ulog.local" android:value="true" />    <!--是否在logcat中打印-->
+    <meta-data android:name="ulog.remote" android:value="true" />   <!--是否远程打印-->
+    <meta-data android:name="ulog.remote_interval" android:value="500" />   <!--远程打印时，日志上报间隔，单位毫秒-->
+    <meta-data android:name="ulog.remote_url" android:value="http://192.168.18.9:8080/" />  <!--远程日志服务器地址，就是uconsole监听的地址-->
+```
 
 3、客户端ULog4Android使用
 
@@ -69,7 +69,7 @@ Log.e(String tag, String msg, Throwable e)
 
 4、运行截图
 
-[运行图片](images/rmlog.png)
+![运行图片](images/rmlog.png)
 
 
 
