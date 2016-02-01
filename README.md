@@ -69,7 +69,7 @@ Log.e(String tag, String msg, Throwable e)
 
 4、运行截图
 
-[运行图片](images/rmlog.png)
+![运行图片](images/rmlog.png)
 
 
 
