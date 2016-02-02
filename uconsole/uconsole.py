@@ -29,57 +29,52 @@ urls = (
 
 localLogs = ""
 
-def storeLogs(content):
-
-	if content.startswith('{') and content.endswith('}'):
-		content = '[' + content + ']'
-	logs = json.loads(content)
-
-	for log in logs:
-
-		if 'stack' not in log:
-			log['stack'] = " "
-
-		color = '#808080'
-		if log['level'] == 'INFO':
-			color = '#008000'
-		elif log['level'] == 'WARNING':
-			color = '#FFA500'
-		elif log['level'] == 'ERROR':
-			color = '#FF0000'
-
-		strLog = '<div style="color:%s">%s  %s: [%s] %s </div>' % (color, log['time'],log['level'], log['tag'], log['msg'])
-
-		stacks = log['stack'].split('\n')
-		strLog = strLog + ('<div color="%s">' % color)
-		for s in stacks:
-			strLog = strLog + ('<div>%s</div>' % (s.strip()))
-
-		strLog = strLog + '</div>'
-		global localLogs
-		localLogs = localLogs + strLog
-		
-
-def encodeHtml(content):
-
-	htmlFormat = "<html><head><title></title></head><body>%s   <script type=\"text/javascript\">function myrefresh(){window.location.reload();window.scrollTo(0,document.body.scrollHeight);}setTimeout('myrefresh()',1000); </script></body></html>"	
-	content = content.encode('gbk')
-	return htmlFormat % content
-
 
 class index:
 
 	def GET(self):
 
+		htmlFormat = "<html><head><title></title></head><body>%s   <script type=\"text/javascript\">function myrefresh(){window.location.reload();window.scrollTo(0,document.body.scrollHeight);}setTimeout('myrefresh()',1000); </script></body></html>"	
 		global localLogs
+		localLogs = localLogs.encode('gbk')
+		return htmlFormat % localLogs
 
-		return encodeHtml(localLogs)
 
 	def POST(self):
 
-		content=web.input()
-		logs = content.get('log')
-		storeLogs(logs)
+		inputs=web.input()
+		content = inputs.get('log')
+
+		if content.startswith('{') and content.endswith('}'):
+			content = '[' + content + ']'
+
+		logs = json.loads(content)
+
+		for log in logs:
+
+			if 'stack' not in log:
+				log['stack'] = " "
+
+			color = '#808080'
+			if log['level'] == 'INFO':
+				color = '#008000'
+			elif log['level'] == 'WARNING':
+				color = '#FFA500'
+			elif log['level'] == 'ERROR':
+				color = '#FF0000'
+
+			strLog = '<div style="color:%s">%s  %s: [%s] %s </div>' % (color, log['time'],log['level'], log['tag'], log['msg'])
+
+			stacks = log['stack'].split('\n')
+			strLog = strLog + ('<div color="%s">' % color)
+			for s in stacks:
+				strLog = strLog + ('<div>%s</div>' % (s.strip()))
+
+			strLog = strLog + '</div>'
+
+			global localLogs
+			localLogs = localLogs + strLog
+
 		return ""
 
 

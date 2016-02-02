@@ -9,6 +9,8 @@
 
 在原有Log的基础上，我们加上了远程日志打印，我们暂且称之为ulog吧
 
+详细情况可以看我们的一篇博客：[ULog远程日志打印](http://www.uustory.com/?p=2049)
+
 ulog包括两部分
 
 ULog4Android ：一个简单的Android Library工程，简单封装了下日志，增加远程日志发送
